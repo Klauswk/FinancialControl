@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="expense" type="rhcloud.com.financialcontrol.javabean.Expense"/>
+    </data>
+
+    <RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+        <TextView
+            android:padding="20dp"
+            android:text='@{"Id: " + expense.idExpense}'
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvId"/>
+
+        <TextView
+            android:padding="20dp"
+            android:text='@{"Description: " + expense.description}'
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvDescription"
+            android:layout_below="@+id/tvId"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:padding="20dp"
+            android:text='@{"Value: " + expense.value}'
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvValue"
+            android:layout_below="@+id/tvDescription"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
+
+</layout>

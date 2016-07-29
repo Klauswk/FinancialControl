@@ -19,7 +19,6 @@ import org.junit.runner.RunWith;
 import rhcloud.com.financialcontrol.R;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -29,7 +28,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
-@LargeTest
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
 
@@ -83,16 +81,16 @@ public class MainActivityTest {
         appCompatTextView4.perform(click());
 
         ViewInteraction textView2 = onView(
-                allOf(withId(R.id.tvId), withText("Id: 4"), isDisplayed()));
-        textView2.check(matches(withText("Id: 4")));
+                allOf(withId(R.id.tvId), withText("4"), isDisplayed()));
+        textView2.check(matches(withText("4")));
 
         ViewInteraction textView3 = onView(
-                allOf(withId(R.id.tvDescription), withText("Description: Test"), isDisplayed()));
-        textView3.check(matches(withText("Description: Test")));
+                allOf(withId(R.id.tvDescription), withText("Test"), isDisplayed()));
+        textView3.check(matches(withText("Test")));
 
         ViewInteraction textView4 = onView(
-                allOf(withId(R.id.tvValue), withText("Value: 22"), isDisplayed()));
-        textView4.check(matches(withText("Value: 22")));
+                allOf(withId(R.id.tvValue), withText("22"), isDisplayed()));
+        textView4.check(matches(withText("22")));
 
     }
 

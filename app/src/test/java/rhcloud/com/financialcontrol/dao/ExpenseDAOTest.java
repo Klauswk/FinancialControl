@@ -62,7 +62,7 @@ public class ExpenseDAOTest {
     public void updateExpense()  {
         Expense movie2 = new Expense(0, "20", "Movie", ExpenseOption.MOVIE);
         expenseDAO.updateExpense(movie2);
-        assertTrue(expenseDAO.getExpenseById(movie2.getIdExpense()).getValue().contentEquals("20"));
+        assertTrue(expenseDAO.getExpenseById(0).getValue().contentEquals("20"));
     }
 
     @Test(expected = NullPointerException.class)

@@ -1,39 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
+        <import type="android.view.View"/>
         <variable name="expense" type="rhcloud.com.financialcontrol.javabean.Expense"/>
+        <variable name="state" type="android.databinding.ObservableBoolean"/>
     </data>
 
     <RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp">
 
-        <TextView
+        <EditText
             android:padding="20dp"
-            android:text='@{"Id: " + expense.idExpense}'
+            android:hint="Id:"
+            android:text='@{""+expense.idExpense}'
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tvId"/>
+            android:id="@+id/tvId"
+            android:enabled="false"/>
 
-        <TextView
+        <EditText
             android:padding="20dp"
-            android:text='@{"Description: " + expense.description}'
+            android:hint="Description: "
+            android:text='@={expense.description}'
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tvDescription"
             android:layout_below="@+id/tvId"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:enabled="@{state.get()}"/>
 
-        <TextView
+        <EditText
             android:padding="20dp"
-            android:text='@{"Value: " + expense.value}'
+            android:hint="Value:"
+            android:text='@={expense.value}'
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tvValue"
             android:layout_below="@+id/tvDescription"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:enabled="@{state.get()}"/>
+
+        <Button
+            android:background="@drawable/modern_button_state"
+            android:text="Edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvValue"
+            android:id="@+id/btnEdit"
+            android:visibility="@{state.get() ? View.GONE : View.VISIBLE}"/>
+
+        <Button
+            android:background="@drawable/modern_button_state"
+            android:text="Save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnSave"
+            android:layout_below="@+id/tvValue"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:visibility="@{state.get() ? View.VISIBLE : View.GONE}"/>
 
     </RelativeLayout>
 

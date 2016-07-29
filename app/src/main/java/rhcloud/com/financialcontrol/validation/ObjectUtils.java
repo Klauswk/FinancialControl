@@ -18,6 +18,9 @@ public class ObjectUtils {
     }
 
     public static boolean checkForStringsNullOrEmpty(String... values){
+        if(values == null || values.length == 0){
+            return true;
+        }
         for(String s : values){
             if(checkForStringNullOrEmpty(s)){
                 return true;

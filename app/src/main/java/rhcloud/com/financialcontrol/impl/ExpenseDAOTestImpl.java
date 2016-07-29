@@ -74,8 +74,12 @@ public class ExpenseDAOTestImpl implements ExpenseDAO {
     @Override
     public void updateExpense(Expense expense) {
         checkForNullExpense(expense);
+        Expense exp = new Expense();
+        exp.setIdExpense(expense.getIdExpense());
+        exp.setValue(expense.getValue());
+        exp.setDescription(expense.getDescription());
         removeExpense(expense);
-        addExpense(expense);
+        expenseList.add(exp);
     }
 
     @Override

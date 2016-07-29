@@ -20,10 +20,7 @@ import rhcloud.com.financialcontrol.javabean.Expense;
 import rhcloud.com.financialcontrol.javabean.ExpenseOption;
 import rhcloud.com.financialcontrol.tabutil.Consumer;
 import rhcloud.com.financialcontrol.tabutil.Producer;
-import rhcloud.com.financialcontrol.validation.FormValidation;
 import rhcloud.com.financialcontrol.validation.ObjectUtils;
-
-import static rhcloud.com.financialcontrol.R.id.lvExpenses;
 
 
 /**
@@ -55,6 +52,9 @@ public class AddExpenseFragment extends Fragment implements Producer, View.OnCli
         expenseDAO = new ExpenseDAOTestImpl();
         binding.setExpense(expense);
         setRetainInstance(true);
+
+
+
         return rootView;
     }
 

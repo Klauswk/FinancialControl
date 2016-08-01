@@ -16,14 +16,16 @@ import rhcloud.com.financialcontrol.dao.ExpenseDAO;
 import rhcloud.com.financialcontrol.databinding.FragmentExpenseDetailsBinding;
 import rhcloud.com.financialcontrol.impl.ExpenseDAOTestImpl;
 import rhcloud.com.financialcontrol.javabean.Expense;
+import rhcloud.com.financialcontrol.tabutil.Closeable;
 import rhcloud.com.financialcontrol.validation.ObjectUtils;
 
 
 /**
- * Created by Developer on 21/07/2016.
+ * @author <a href="https://github.com/Klauswk">Klaus Klein</a>
+ * @version 1.0
+ * @since 1.0
  */
-
-public class DetailExpenseFragment extends Fragment implements View.OnClickListener{
+public class DetailExpenseFragment extends Fragment implements View.OnClickListener, Closeable {
 
     private View rootView;
     private FragmentExpenseDetailsBinding binding;
@@ -35,7 +37,7 @@ public class DetailExpenseFragment extends Fragment implements View.OnClickListe
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_expense_details,container,false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_expense_details, container, false);
         rootView = binding.getRoot();
         btnEdit = (Button) rootView.findViewById(R.id.btnEdit);
         btnSave = (Button) rootView.findViewById(R.id.btnSave);
@@ -53,9 +55,9 @@ public class DetailExpenseFragment extends Fragment implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View v){
+    public void onClick(View v) {
 
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.btnEdit:
                 enableEdit();
                 break;
@@ -69,11 +71,12 @@ public class DetailExpenseFragment extends Fragment implements View.OnClickListe
         stateOfButton.set(true);
     }
 
-    private void saveModifications(){
+    private void saveModifications() {
         Expense exp = binding.getExpense();
-        if(!ObjectUtils.checkForStringsNullOrEmpty(exp.getDescription(),exp.getValue())){
+        Toast.makeText(getContext(), exp.getDescription(), Toast.LENGTH_SHORT).show();
+        if (!ObjectUtils.checkForStringsNullOrEmpty(exp.getDescription(), exp.getValue())) {
             expenseDAO.updateExpense(exp);
-            Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Saved: " + exp.getDescription(), Toast.LENGTH_SHORT).show();
             stateOfButton.set(false);
         }
     }

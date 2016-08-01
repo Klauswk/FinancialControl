@@ -7,10 +7,10 @@
     tools:context="rhcloud.com.financialcontrol.activity.MainActivity">
 
 
-    <rhcloud.com.financialcontrol.tabutil.TabView
+    <rhcloud.com.financialcontrol.tabutil.TabBody
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/tabView"
+        android:id="@+id/tabBody"
         android:layout_below="@+id/tabLayout"/>
 
     <android.support.design.widget.TabLayout

@@ -24,10 +24,11 @@ import rhcloud.com.financialcontrol.validation.ObjectUtils;
 
 
 /**
- * Created by Developer on 21/07/2016.
+ * @author <a href="https://github.com/Klauswk">Klaus Klein</a>
+ * @version 1.0
+ * @since 1.0
  */
-
-public class AddExpenseFragment extends Fragment implements Producer, View.OnClickListener{
+public class AddExpenseFragment extends Fragment implements Producer, View.OnClickListener {
 
     private View rootView;
     private Expense expense;
@@ -41,11 +42,11 @@ public class AddExpenseFragment extends Fragment implements Producer, View.OnCli
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_expense,container,false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_expense, container, false);
         rootView = binding.getRoot();
         btnInsert = (Button) rootView.findViewById(R.id.btnInsert);
         spOptions = (Spinner) rootView.findViewById(R.id.spOptions);
-        options = new ArrayAdapter(getContext(),android.R.layout.simple_list_item_1, ExpenseOption.values());
+        options = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, ExpenseOption.values());
         spOptions.setAdapter(options);
         btnInsert.setOnClickListener(this);
         expense = new Expense();
@@ -53,20 +54,18 @@ public class AddExpenseFragment extends Fragment implements Producer, View.OnCli
         binding.setExpense(expense);
         setRetainInstance(true);
 
-
-
         return rootView;
     }
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.btnInsert:
 
                 Expense exp = binding.getExpense();
 
-                if(exp != null){
-                    if(ObjectUtils.checkForStringsNullOrEmpty(exp.getDescription(),exp.getValue())) {
+                if (exp != null) {
+                    if (ObjectUtils.checkForStringsNullOrEmpty(exp.getDescription(), exp.getValue())) {
                         Toast.makeText(getContext(), "There is empty fields", Toast.LENGTH_SHORT).show();
                         break;
                     }

@@ -5,7 +5,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Created by Developer on 29/07/2016.
+ * @author <a href="https://github.com/Klauswk">Klaus Klein</a>
+ *
+ * @since 1.0
+ * @version 1.0
  */
 public class ObjectUtilsTest {
 

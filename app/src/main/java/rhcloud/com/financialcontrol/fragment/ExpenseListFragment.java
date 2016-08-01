@@ -18,9 +18,11 @@ import rhcloud.com.financialcontrol.tabutil.Consumer;
 import rhcloud.com.financialcontrol.tabutil.TabFragment;
 
 /**
- * Created by Developer on 21/07/2016.
+ * @author <a href="https://github.com/Klauswk">Klaus Klein</a>
+ *
+ * @since 1.0
+ * @version 1.0
  */
-
 public class ExpenseListFragment extends Fragment implements Consumer, AdapterView.OnItemClickListener{
 
     private ListView lvExpenses;
@@ -46,11 +48,11 @@ public class ExpenseListFragment extends Fragment implements Consumer, AdapterVi
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if(getActivity() instanceof MainActivity){
-            TabFragment tabFragment = new TabFragment(new DetailExpenseFragment(),"Details: " + adapter.getItem(position).getIdExpense() );
+            TabFragment tabFragment = new TabFragment(new DetailExpenseFragment(),"Details");
             Bundle bundle = new Bundle();
             bundle.putInt("idExpense",adapter.getItem(position).getIdExpense());
             tabFragment.getFragment().setArguments(bundle);
-            ((MainActivity)getActivity()).addTab(tabFragment,2);
+            ((MainActivity)getActivity()).addTab(tabFragment);
         }
     }
 

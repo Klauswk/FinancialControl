@@ -9,6 +9,12 @@ import rhcloud.com.financialcontrol.fragment.ExpenseListFragment;
 import rhcloud.com.financialcontrol.tabutil.Tab;
 import rhcloud.com.financialcontrol.tabutil.TabFragment;
 
+/**
+ * @author <a href="https://github.com/Klauswk">Klaus Klein</a>
+ *
+ * @since 1.0
+ * @version 1.0
+ */
 public class MainActivity extends AppCompatActivity {
 
     private Tab tab;
@@ -18,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tab = Tab.createTab(this,R.id.tabView,R.id.tabLayout).addTab(new ExpenseListFragment(),"Expenses").addTab(new AddExpenseFragment(),"Add Expense");
+        tab = Tab.createTab(this,R.id.tabBody,R.id.tabLayout).addTab(new ExpenseListFragment(),"Expenses",getResources().getDrawable(android.R.drawable.ic_menu_add)).addTab(new AddExpenseFragment(),"Add Expense");
     }
 
     public void addTab(TabFragment tabFragment){

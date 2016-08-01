@@ -12,9 +12,11 @@ import rhcloud.com.financialcontrol.javabean.Expense;
 import rhcloud.com.financialcontrol.javabean.ExpenseOption;
 
 /**
- * Created by Developer on 21/07/2016.
+ * @author <a href="https://github.com/Klauswk">Klaus Klein</a>
+ *
+ * @since 1.0
+ * @version 1.0
  */
-
 public class ExpenseDAOTestImpl implements ExpenseDAO {
 
     private static List<Expense> expenseList;

@@ -1,68 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:form_item="http://schemas.android.com/apk/res-auto">
+
     <data>
-        <import type="android.view.View"/>
-        <variable name="expense" type="rhcloud.com.financialcontrol.javabean.Expense"/>
-        <variable name="state" type="android.databinding.ObservableBoolean"/>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="expense"
+            type="rhcloud.com.financialcontrol.javabean.Expense" />
+
+        <variable
+            name="state"
+            type="android.databinding.ObservableBoolean" />
     </data>
 
-    <RelativeLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="20dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <EditText
-            android:padding="20dp"
-            android:hint="Id:"
-            android:text='@{""+expense.idExpense}'
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvId"
-            android:enabled="false"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="5dp">
 
-        <EditText
-            android:padding="20dp"
-            android:hint="Description: "
-            android:text='@={expense.description}'
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvDescription"
-            android:layout_below="@+id/tvId"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:enabled="@{state.get()}"/>
+            <rhcloud.com.financialcontrol.tabutil.FormItem
+                android:id="@+id/fiId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                form_item:anwserText='@{""+expense.idExpense}'
+                form_item:tvTitle="Id:"
+                android:enabled="false" />
 
-        <EditText
-            android:padding="20dp"
-            android:hint="Value:"
-            android:text='@={expense.value}'
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvValue"
-            android:layout_below="@+id/tvDescription"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:enabled="@{state.get()}"/>
+            <rhcloud.com.financialcontrol.tabutil.FormItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="@{state.get()}"
+                form_item:anwserText='@={expense.description}'
+                form_item:tvTitle="Description:" />
 
-        <Button
-            android:background="@drawable/modern_button_state"
-            android:text="Edit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvValue"
-            android:id="@+id/btnEdit"
-            android:visibility="@{state.get() ? View.GONE : View.VISIBLE}"/>
+            <rhcloud.com.financialcontrol.tabutil.FormItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="@{state.get()}"
+                form_item:anwserText='@={expense.value}'
+                form_item:tvTitle="Value:" />
 
-        <Button
-            android:background="@drawable/modern_button_state"
-            android:text="Save"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnSave"
-            android:layout_below="@+id/tvValue"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:visibility="@{state.get() ? View.VISIBLE : View.GONE}"/>
+            <Button
+                android:id="@+id/btnEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/modern_button_state"
+                android:text="Edit"
+                android:visibility="@{state.get() ? View.GONE : View.VISIBLE}" />
 
-    </RelativeLayout>
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/modern_button_state"
+                android:text="Save"
+                android:visibility="@{state.get() ? View.VISIBLE : View.GONE}" />
 
+        </LinearLayout>
+    </ScrollView>
 </layout>

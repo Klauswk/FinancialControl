@@ -1,5 +1,6 @@
 package rhcloud.com.financialcontrol.tabutil;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
@@ -20,43 +21,47 @@ public class Tab {
     /**
      * Act has a holder to the views, extends {@link android.support.v4.view.ViewPager}
      */
-    private TabView tabView;
+    private TabBody tabBody;
 
     /**
      * The tab itself
      */
     private TabLayout tabLayout;
 
+    private Context context;
+
     /**
      * Base constructor.
      * @param activity , must extends {@link FragmentActivity}
-     * @param tabViewId , the view id of the {@link TabView}
+     * @param tabViewId , the view id of the {@link TabBody}
      * @param tabLayoutId , the view id of the {@link TabLayout}
      * @since 1.0
      * @version 1.0
      */
     public Tab(@NonNull FragmentActivity activity, @IdRes int tabViewId, @IdRes int tabLayoutId){
-        tabView = (TabView) activity.findViewById(tabViewId);
-        tabView.prepare(activity);
+        tabBody = (TabBody) activity.findViewById(tabViewId);
+        tabBody.prepare(activity);
 
         tabLayout = (TabLayout) activity.findViewById(tabLayoutId);
-        tabLayout.setupWithViewPager(tabView);
+        tabLayout.setupWithViewPager(tabBody);
+
+        context = activity.getBaseContext();
     }
 
     /**
      * Base constructor.
      * @param activity , must extends {@link FragmentActivity}
-     * @param tabView , the {@link TabView}
+     * @param tabBody , the {@link TabBody}
      * @param tabLayout , the {@link TabLayout}
      * @since 1.0
      * @version 1.0
      */
-    public Tab(@NonNull FragmentActivity activity, @NonNull TabView tabView, @NonNull TabLayout tabLayout){
-        this.tabView = tabView;
-        tabView.prepare(activity);
+    public Tab(@NonNull FragmentActivity activity, @NonNull TabBody tabBody, @NonNull TabLayout tabLayout){
+        this.tabBody = tabBody;
+        tabBody.prepare(activity);
 
         this.tabLayout = tabLayout;
-        tabLayout.setupWithViewPager(tabView);
+        tabLayout.setupWithViewPager(tabBody);
     }
 
     /**
@@ -75,22 +80,22 @@ public class Tab {
     }
 
     /**
-     * Getter for the {@link TabView}
-     * @return tabView
+     * Getter for the {@link TabBody}
+     * @return tabBody
      * @since 1.0
      * @version 1.0
      */
-    public TabView getTabView() {
-        return tabView;
+    public TabBody getTabBody() {
+        return tabBody;
     }
 
     /**
-     * Setter for the {@link TabView}
+     * Setter for the {@link TabBody}
      * @since 1.0
      * @version 1.0
      */
-    public void setTabView(TabView tabView) {
-        this.tabView = tabView;
+    public void setTabBody(TabBody tabBody) {
+        this.tabBody = tabBody;
     }
 
     /**
@@ -121,7 +126,10 @@ public class Tab {
      * @return tab
      */
     public Tab addTab(@NonNull TabFragment tabFragment){
-        tabView.addTab(tabFragment,-1);
+        tabBody.addTab(tabFragment,-1);
+        for(int i = 0; i < tabBody.getTabContainer().getCount() ; i++){
+            tabLayout.getTabAt(i).setCustomView(new TabView(context, tabBody.getTabContainer().getTabFragment(i)));
+        }
         return this;
     }
 
@@ -135,7 +143,10 @@ public class Tab {
      * @return tab
      */
     public Tab addTab(@NonNull TabFragment tabFragment , int position){
-        tabView.addTab(tabFragment,position);
+        tabBody.addTab(tabFragment,position);
+        for(int i = 0; i < tabBody.getTabContainer().getCount() ; i++){
+            tabLayout.getTabAt(i).setCustomView(new TabView(context, tabBody.getTabContainer().getTabFragment(i)));
+        }
         return this;
     }
 

@@ -4,9 +4,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 /**
- * Created by Developer on 21/07/2016.
+ * @author <a href="https://github.com/Klauswk">Klaus Klein</a>
+ *
+ * @since 1.0
+ * @version 1.0
  */
-
 public class Expense{
 
     private int idExpense;

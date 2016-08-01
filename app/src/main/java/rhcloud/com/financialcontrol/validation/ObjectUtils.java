@@ -1,11 +1,12 @@
 package rhcloud.com.financialcontrol.validation;
 
-import static android.R.attr.value;
 
 /**
- * Created by Developer on 27/07/2016.
+ * @author <a href="https://github.com/Klauswk">Klaus Klein</a>
+ *
+ * @since 1.0
+ * @version 1.0
  */
-
 public class ObjectUtils {
 
     public static boolean checkForStringNullOrEmpty(String value){

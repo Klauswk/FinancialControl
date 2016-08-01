@@ -5,9 +5,11 @@ import java.util.List;
 import rhcloud.com.financialcontrol.javabean.Expense;
 
 /**
- * Created by Developer on 21/07/2016.
+ * @author <a href="https://github.com/Klauswk">Klaus Klein</a>
+ *
+ * @since 1.0
+ * @version 1.0
  */
-
 public interface ExpenseDAO {
 
     public void addExpense(Expense expense);

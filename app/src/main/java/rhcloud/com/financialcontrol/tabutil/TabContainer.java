@@ -101,7 +101,6 @@ public class TabContainer extends FragmentPagerAdapter implements Consumer{
             tabFragments.add(tabFragment);
         }else{
             tabFragments.add(position,tabFragment);
-
         }
         checkForCallback(tabFragment);
         notifyDataSetChanged();

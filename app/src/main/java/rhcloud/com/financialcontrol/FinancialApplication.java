@@ -3,9 +3,11 @@ package rhcloud.com.financialcontrol;
 import android.app.Application;
 
 /**
- * Created by Developer on 26/07/2016.
+ * @author <a href="https://github.com/Klauswk">Klaus Klein</a>
+ *
+ * @since 1.0
+ * @version 1.0
  */
-
 public class FinancialApplication extends Application {
     @Override
     public void onCreate() {

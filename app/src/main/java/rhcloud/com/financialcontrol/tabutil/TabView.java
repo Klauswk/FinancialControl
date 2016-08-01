@@ -1,133 +1,62 @@
 package rhcloud.com.financialcontrol.tabutil;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import rhcloud.com.financialcontrol.R;
 
 /**
  * @author <a href="https://github.com/Klauswk">Klaus Klein</a>
- * Class that extends {@link ViewPager} and override some of their methods
- *
- * @since 1.0
  * @version 1.0
+ * @since 1.0
  */
-public class TabView extends ViewPager {
 
-    /**
-     * The implementation of a custom {@link FragmentPagerAdapter} used in the {@link TabView#prepare(FragmentActivity)}.
-     * @since 1.0
-     * @version 1.0
-     */
-    private TabContainer tabContainer;
+public class TabView extends LinearLayout {
 
-    /**
-     * Default Constructor for a {@link android.view.View}
-     * @param context
-     * @since 1.0
-     * @version 1.0
-     */
-    public TabView(Context context) {
+    private TextView tvTitle;
+    private ImageView ivIcon;
+    private ImageButton ibClose;
+
+    public TabView(@NonNull Context context) {
         super(context);
     }
 
-    /**
-     * Default Constructor for a {@link android.view.View}
-     * @param context
-     * @since 1.0
-     * @version 1.0
-     */
-    public TabView(Context context, AttributeSet attrs) {
+    public TabView(@NonNull Context context ,@NonNull TabFragment tabFragment){
+        super(context);
+
+        LayoutInflater inflater = (LayoutInflater)  getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        inflater.inflate(R.layout.tab_view, this);
+
+        ivIcon = (ImageView) findViewById(R.id.icon);
+        tvTitle = (TextView) findViewById(R.id.text1);
+        ibClose = (ImageButton) findViewById(R.id.ibClose);
+
+        if(tabFragment.getTitle() == null){throw new NullPointerException("Title can't be null");}
+
+            tvTitle.setText(tabFragment.getTitle());
+
+        if(tabFragment.getDrawable() != null){ivIcon.setImageDrawable(tabFragment.getDrawable());}
+        else{ivIcon.setVisibility(View.GONE);}
+
+        if(tabFragment.getFragment() == null){throw new NullPointerException("Fragment can't be null");}
+
+        ibClose.setVisibility(tabFragment.getFragment() instanceof Closeable ? View.VISIBLE : View.GONE);
+    }
+
+    public TabView(@NonNull Context context, @NonNull AttributeSet attrs) {
         super(context, attrs);
-    }
-
-    /**
-     * Prepare the {@link TabContainer} and set the {@link FragmentPagerAdapter}, that its the {@link TabContainer} itself.
-     * @since 1.0
-     * @version 1.0
-     */
-    public void prepare(FragmentActivity fragmentActivity){
-        tabContainer = new TabContainer(fragmentActivity);
-        setAdapter(tabContainer);
-    }
-
-    /**
-     * Checks if the {@link TabContainer} has been properly prepare.
-     * @since 1.0
-     * @version 1.0
-     */
-    private void checkIfHasBeenPrepare(){
-        if(tabContainer == null){
-            throw new IllegalStateException("Tab Container is null, did you forget to call #prepare?");
-        }
-    }
-
-    /**
-     * Add the {@link TabFragment} to the {@link TabContainer}
-     * @param tabFragment
-     * @param position
-     * @since 1.0
-     * @version 1.0
-     */
-    public void addTab(@NonNull TabFragment tabFragment, int position){
-        tabContainer.addTab(tabFragment,-1);
-        setCurrentItem(position);
-    }
-
-    @Deprecated
-    private void checkToReplace(@NonNull TabFragment tabFragment, int position) {
-        Fragment tabContainerItem = tabContainer.getItem(position);
-
-        Log.d("TAB","Item: " + tabFragment.getFragment().getArguments().getInt("idExpense"));
-        if(tabContainerItem != null){
-            Log.d("TAB","Item not null");
-            if(tabContainerItem.getClass() == tabFragment.getFragment().getClass()){
-                Log.d("TAB","Same class");
-                if(getCurrentItem() == position){
-                    Log.d("TAB","Same position");
-                    if((position -1) > 0){
-                        Log.d("TAB","Setting current back");
-                        setCurrentItem(getCurrentItem() -1);
-                    }
-                }
-                Log.d("TAB","Replacing");
-                tabContainer.replaceTab(tabFragment,position);
-            }else{
-                Log.d("TAB","Not same class");
-                tabContainer.addTab(tabFragment,position);
-            }
-        }else{
-            Log.d("TAB","Item is null");
-            tabContainer.addTab(tabFragment,position);
-        }
-    }
-
-    /**
-     * Add the {@link TabFragment} to the {@link TabContainer}
-     * @param tabFragment
-     * @since 1.0
-     * @version 1.0
-     */
-    public void addTab(@NonNull TabFragment tabFragment){
-        checkIfHasBeenPrepare();
-        tabContainer.addTab(tabFragment,-1);
-    }
 
 
-    /**
-     * Getter for the {@link TabContainer}
-     * @return tabContainer
-     * @since 1.0
-     * @version 1.0
-     */
-    public TabContainer getTabContainer() {
-        return tabContainer;
+
     }
 }

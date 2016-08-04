@@ -5,7 +5,11 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 
@@ -21,7 +25,7 @@ import java.util.List;
  * @since 1.0
  * @version 1.0
  */
-public class TabContainer extends FragmentPagerAdapter implements Consumer{
+public class TabContainer extends FragmentStatePagerAdapter implements Consumer{
 
     /**
      * The list of {@link TabFragment} presented in the {@link TabContainer}
@@ -37,6 +41,8 @@ public class TabContainer extends FragmentPagerAdapter implements Consumer{
      */
     private List<Consumer> consumers;
 
+    private FragmentManager manager;
+
     /**
      * Default constructor of the {@link TabContainer} class
      * @param fragmentActivity , to get the {@link android.support.v4.app.FragmentManager}
@@ -45,6 +51,7 @@ public class TabContainer extends FragmentPagerAdapter implements Consumer{
      */
     public TabContainer(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity.getSupportFragmentManager()); tabFragments = new ArrayList<>(3); consumers  = new ArrayList<>(3);
+        manager = fragmentActivity.getSupportFragmentManager();
     }
 
     /**
@@ -148,6 +155,11 @@ public class TabContainer extends FragmentPagerAdapter implements Consumer{
             return tabFragments.get(position).getFragment();
     }
 
+    @Override
+    public int getItemPosition(Object object){
+        return PagerAdapter.POSITION_NONE;
+    }
+
     /**
      * Getter for the {@link TabFragment}
      * @param position , the position to get
@@ -182,5 +194,15 @@ public class TabContainer extends FragmentPagerAdapter implements Consumer{
         for(Consumer c : consumers){
             c.onDataChange();
         }
+    }
+
+    public TabFragment removeTabAt(int position){
+        TabFragment removed = tabFragments.remove(position);
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.remove(removed.getFragment());
+        transaction.detach(removed.getFragment());
+        transaction.commit();
+        notifyDataSetChanged();
+        return removed;
     }
 }

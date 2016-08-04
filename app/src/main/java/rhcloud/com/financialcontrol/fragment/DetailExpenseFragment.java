@@ -1,5 +1,6 @@
 package rhcloud.com.financialcontrol.fragment;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableBoolean;
 import android.os.Bundle;
@@ -37,6 +38,9 @@ public class DetailExpenseFragment extends Fragment implements View.OnClickListe
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        System.out.println("Creating onCreateView");
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_expense_details, container, false);
         rootView = binding.getRoot();
         btnEdit = (Button) rootView.findViewById(R.id.btnEdit);
@@ -47,11 +51,42 @@ public class DetailExpenseFragment extends Fragment implements View.OnClickListe
         binding.setExpense(expenseDAO.getExpenseById(getArguments().getInt("idExpense")));
         stateOfButton.set(false);
         binding.setState(stateOfButton);
-        setRetainInstance(true);
+        //setRetainInstance(true);
 
         btnEdit.setVisibility(View.GONE);
 
         return rootView;
+    }
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        System.out.println("Creating new fragment");
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        System.out.println("onAttach");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        System.out.println("pause");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        System.out.println("Destroy");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        System.out.println("Resume");
     }
 
     @Override

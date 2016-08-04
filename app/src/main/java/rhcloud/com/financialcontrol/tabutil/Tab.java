@@ -8,6 +8,13 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
+import android.view.View;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 /**
  * @author <a href="https://github.com/Klauswk">Klaus Klein</a>
@@ -16,7 +23,7 @@ import android.support.v4.app.FragmentActivity;
  * @since 1.0
  * @version 1.0
  */
-public class Tab {
+public class Tab implements View.OnClickListener{
 
     /**
      * Act has a holder to the views, extends {@link android.support.v4.view.ViewPager}
@@ -46,6 +53,8 @@ public class Tab {
         tabLayout.setupWithViewPager(tabBody);
 
         context = activity.getBaseContext();
+
+        listOfHeaders = new ArrayList<>(5);
     }
 
     /**
@@ -61,7 +70,8 @@ public class Tab {
         tabBody.prepare(activity);
 
         this.tabLayout = tabLayout;
-        tabLayout.setupWithViewPager(tabBody);
+        this.tabLayout.setupWithViewPager(tabBody);
+        listOfHeaders = new ArrayList<>(5);
     }
 
     /**
@@ -126,10 +136,7 @@ public class Tab {
      * @return tab
      */
     public Tab addTab(@NonNull TabFragment tabFragment){
-        tabBody.addTab(tabFragment,-1);
-        for(int i = 0; i < tabBody.getTabContainer().getCount() ; i++){
-            tabLayout.getTabAt(i).setCustomView(new TabView(context, tabBody.getTabContainer().getTabFragment(i)));
-        }
+        addTab(tabFragment,-1);
         return this;
     }
 
@@ -144,10 +151,22 @@ public class Tab {
      */
     public Tab addTab(@NonNull TabFragment tabFragment , int position){
         tabBody.addTab(tabFragment,position);
-        for(int i = 0; i < tabBody.getTabContainer().getCount() ; i++){
-            tabLayout.getTabAt(i).setCustomView(new TabView(context, tabBody.getTabContainer().getTabFragment(i)));
-        }
+        updateTabHeader();
         return this;
+    }
+
+    private List<TabView> listOfHeaders;
+
+    private void updateTabHeader() {
+        for(int i = 0; i < tabBody.getTabContainer().getCount() ; i++){
+            if(listOfHeaders.size() <= i){
+                TabView tabView = new TabView(context, tabBody.getTabContainer().getTabFragment(i), this);
+                listOfHeaders.add(tabView);
+                tabLayout.getTabAt(i).setCustomView(tabView);
+            }else{
+                tabLayout.getTabAt(i).setCustomView(listOfHeaders.get(i));
+            }
+        }
     }
 
     /**
@@ -223,5 +242,19 @@ public class Tab {
      */
     public Tab addTab(@NonNull Fragment fragment, @Nullable String title , @Nullable Drawable drawable, int position){
         return addTab(new TabFragment(fragment,title,drawable), position);
+    }
+
+    @Override
+    public void onClick(View view) {
+        for(int i = 0; i < tabBody.getTabContainer().getCount() ; i++){
+            if(tabLayout.getTabAt(i).getCustomView().getTag().equals(view.getTag())){
+                TabFragment removed = tabBody.getTabContainer().removeTabAt(i);
+                listOfHeaders.remove(i);
+                removed = null;
+                updateTabHeader();
+                tabBody.setCurrentItem(i == 0 ? 0 : --i);
+                return;
+            }
+        }
     }
 }

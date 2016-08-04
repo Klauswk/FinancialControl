@@ -117,6 +117,10 @@ public class TabBody extends ViewPager {
         tabContainer.addTab(tabFragment,-1);
     }
 
+    public TabFragment removeTabAt(int position){
+        return tabContainer.removeTabAt(position);
+    }
+
 
     /**
      * Getter for the {@link TabContainer}

@@ -78,6 +78,6 @@ public class Expense{
 
     @Override
     public String toString() {
-        return idExpense + " - " + description;
+        return value + "$ - " + description;
     }
 }

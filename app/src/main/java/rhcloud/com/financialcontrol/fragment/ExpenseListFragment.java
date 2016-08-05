@@ -1,8 +1,6 @@
 package rhcloud.com.financialcontrol.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,13 +9,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import rhcloud.com.droidutils.tabutil.tabutil.interfaces.Consumer;
+import rhcloud.com.droidutils.tabutil.tabutil.TabFragment;
+import rhcloud.com.financialcontrol.FinancialApplication;
 import rhcloud.com.financialcontrol.R;
 import rhcloud.com.financialcontrol.activity.MainActivity;
 import rhcloud.com.financialcontrol.dao.ExpenseDAO;
 import rhcloud.com.financialcontrol.impl.ExpenseDAOTestImpl;
 import rhcloud.com.financialcontrol.javabean.Expense;
-import rhcloud.com.financialcontrol.tabutil.Consumer;
-import rhcloud.com.financialcontrol.tabutil.TabFragment;
 
 /**
  * @author <a href="https://github.com/Klauswk">Klaus Klein</a>
@@ -40,7 +39,7 @@ public class ExpenseListFragment extends Fragment implements Consumer, AdapterVi
         rootView = inflater.inflate(R.layout.fragment_expense_list, container, false);
 
         lvExpenses = (ListView) rootView.findViewById(R.id.lvExpenses);
-        expenseDAO = new ExpenseDAOTestImpl();
+        expenseDAO = ((FinancialApplication)getActivity().getApplication()).getExpenseDAO();
         adapter = new ArrayAdapter(getContext(),android.R.layout.simple_list_item_1,expenseDAO.getExpenseList());
         lvExpenses.setAdapter(adapter);
         lvExpenses.setOnItemClickListener(this);

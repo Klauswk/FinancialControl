@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ import rhcloud.com.financialcontrol.javabean.ExpenseOption;
  */
 public class ExpenseDAOTestImpl implements ExpenseDAO {
 
-    private static List<Expense> expenseList;
+    private List<Expense> expenseList;
     private static int idExpense = 0;
 
     public ExpenseDAOTestImpl(){
@@ -48,6 +49,7 @@ public class ExpenseDAOTestImpl implements ExpenseDAO {
         expense.setIdExpense(exp.getIdExpense());
         exp.setValue(expense.getValue());
         exp.setDescription(expense.getDescription());
+        exp.setExpenseOption(expense.getExpenseOption());
         expenseList.add(exp);
     }
 
@@ -78,8 +80,11 @@ public class ExpenseDAOTestImpl implements ExpenseDAO {
         checkForNullExpense(expense);
         Expense exp = new Expense();
         exp.setIdExpense(expense.getIdExpense());
+
+
         exp.setValue(expense.getValue());
         exp.setDescription(expense.getDescription());
+        exp.setExpenseOption(expense.getExpenseOption());
         removeExpense(expense);
         expenseList.add(exp);
     }

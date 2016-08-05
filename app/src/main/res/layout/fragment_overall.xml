@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:form_item="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp">
+
+    <data>
+        <variable
+            name="totalExpense"
+            type="java.lang.Double"/>
+        <variable
+            name="totalExpenseFood"
+            type="java.lang.Double"/>
+        <variable
+            name="totalExpenseTransport"
+            type="java.lang.Double"/>
+        <variable
+            name="totalExpenseEtc"
+            type="java.lang.Double"/>
+        <variable
+            name="totalExpenseMovie"
+            type="java.lang.Double"/>
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <rhcloud.com.droidutils.tabutil.tabutil.view.FormItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                form_item:tvTitle="Total Expense"
+                form_item:anwserText='@{""+totalExpense}'
+                android:enabled="false"/>
+
+            <rhcloud.com.droidutils.tabutil.tabutil.view.FormItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                form_item:tvTitle="Movie Expense"
+                form_item:anwserText='@{""+totalExpenseMovie}'
+                android:enabled="false"/>
+
+            <rhcloud.com.droidutils.tabutil.tabutil.view.FormItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                form_item:tvTitle="Transport Expense"
+                form_item:anwserText='@{""+totalExpenseTransport}'
+                android:enabled="false"/>
+
+            <rhcloud.com.droidutils.tabutil.tabutil.view.FormItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                form_item:tvTitle="Food Expense"
+                form_item:anwserText='@{""+totalExpenseFood}'
+                android:enabled="false"/>
+
+            <rhcloud.com.droidutils.tabutil.tabutil.view.FormItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                form_item:tvTitle="Etc Expense"
+                form_item:anwserText='@{""+totalExpenseEtc}'
+                android:enabled="false"/>
+        </LinearLayout>
+    </ScrollView>
+</layout>
+

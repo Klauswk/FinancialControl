@@ -1,6 +1,5 @@
 package rhcloud.com.financialcontrol.fragment;
 
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableBoolean;
 import android.os.Bundle;
@@ -9,16 +8,22 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import rhcloud.com.droidutils.tabutil.tabutil.interfaces.Closeable;
+import rhcloud.com.droidutils.validation.ObjectUtils;
+import rhcloud.com.financialcontrol.FinancialApplication;
 import rhcloud.com.financialcontrol.R;
 import rhcloud.com.financialcontrol.dao.ExpenseDAO;
 import rhcloud.com.financialcontrol.databinding.FragmentExpenseDetailsBinding;
 import rhcloud.com.financialcontrol.impl.ExpenseDAOTestImpl;
 import rhcloud.com.financialcontrol.javabean.Expense;
-import rhcloud.com.financialcontrol.tabutil.Closeable;
-import rhcloud.com.financialcontrol.validation.ObjectUtils;
+import rhcloud.com.financialcontrol.javabean.ExpenseOption;
+
+import static rhcloud.com.financialcontrol.R.id.btnEdit;
+import static rhcloud.com.financialcontrol.R.id.btnSave;
+import static rhcloud.com.financialcontrol.R.id.spOptions;
 
 
 /**
@@ -28,75 +33,42 @@ import rhcloud.com.financialcontrol.validation.ObjectUtils;
  */
 public class DetailExpenseFragment extends Fragment implements View.OnClickListener, Closeable {
 
-    private View rootView;
     private FragmentExpenseDetailsBinding binding;
     private ExpenseDAO expenseDAO;
-    private Button btnEdit;
-    private Button btnSave;
     private final ObservableBoolean stateOfButton = new ObservableBoolean();
+    private ArrayAdapter<String> options;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        System.out.println("Creating onCreateView");
-
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_expense_details, container, false);
-        rootView = binding.getRoot();
-        btnEdit = (Button) rootView.findViewById(R.id.btnEdit);
-        btnSave = (Button) rootView.findViewById(R.id.btnSave);
-        btnEdit.setOnClickListener(this);
-        btnSave.setOnClickListener(this);
-        expenseDAO = new ExpenseDAOTestImpl();
-        binding.setExpense(expenseDAO.getExpenseById(getArguments().getInt("idExpense")));
+        binding.btnSave.setOnClickListener(this);
+        binding.btnEdit.setOnClickListener(this);
+        expenseDAO = ((FinancialApplication)getActivity().getApplication()).getExpenseDAO();
+        Expense idExpense = expenseDAO.getExpenseById(getArguments().getInt("idExpense"));
+        binding.setExpense(idExpense);
+
+        options = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, ExpenseOption.values());
+        binding.spOptions.setAdapter(options);
+        System.out.println(idExpense.getExpenseOption());
+        binding.spOptions.setSelection(idExpense.getExpenseOption().ordinal());
+        binding.btnEdit.setVisibility(View.GONE);
         stateOfButton.set(false);
         binding.setState(stateOfButton);
-        //setRetainInstance(true);
+        setRetainInstance(true);
 
-        btnEdit.setVisibility(View.GONE);
-
-        return rootView;
-    }
-
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        System.out.println("Creating new fragment");
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        System.out.println("onAttach");
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        System.out.println("pause");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        System.out.println("Destroy");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        System.out.println("Resume");
+        return binding.getRoot();
     }
 
     @Override
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.btnEdit:
+            case btnEdit:
                 enableEdit();
                 break;
-            case R.id.btnSave:
+            case btnSave:
                 saveModifications();
                 break;
         }
@@ -108,8 +80,9 @@ public class DetailExpenseFragment extends Fragment implements View.OnClickListe
 
     private void saveModifications() {
         Expense exp = binding.getExpense();
-        Toast.makeText(getContext(), exp.getDescription(), Toast.LENGTH_SHORT).show();
         if (!ObjectUtils.checkForStringsNullOrEmpty(exp.getDescription(), exp.getValue())) {
+            int i = binding.spOptions.getSelectedItemPosition();
+            exp.setExpenseOption(ExpenseOption.values()[i]);
             expenseDAO.updateExpense(exp);
             Toast.makeText(getContext(), "Saved: " + exp.getDescription(), Toast.LENGTH_SHORT).show();
             stateOfButton.set(false);

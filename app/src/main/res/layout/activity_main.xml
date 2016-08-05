@@ -8,7 +8,7 @@
     tools:context="rhcloud.com.financialcontrol.activity.MainActivity">
 
 
-    <rhcloud.com.financialcontrol.tabutil.TabBody
+    <rhcloud.com.droidutils.tabutil.tabutil.TabBody
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/tabBody"

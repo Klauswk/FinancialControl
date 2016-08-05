@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:form_item="http://schemas.android.com/apk/res-auto">
+    xmlns:form_item="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools">
 
     <data>
 
@@ -22,7 +23,7 @@
         <LinearLayout android:layout_width="match_parent"
             android:layout_height="wrap_content" android:orientation="vertical">
 
-            <rhcloud.com.financialcontrol.tabutil.FormItem
+            <rhcloud.com.droidutils.tabutil.tabutil.view.FormItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 form_item:tvTitle="Id:"
@@ -46,6 +47,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvValue"
+                android:enabled="@{state.get()}"/>
+
+            <Spinner
+                android:id="@+id/spOptions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:enabled="@{state.get()}"/>
 
             <Button

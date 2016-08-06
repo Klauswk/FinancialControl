@@ -14,4 +14,5 @@ public interface ExpenseService {
 
     public Double getTotalExpensesByType(ExpenseOption option);
 
+    public String[] getExpenseOptions();
 }

@@ -59,6 +59,7 @@ public class ExpenseDAOTest {
     public void removeExpense()  {
         expenseDAO.removeExpense(movie);
         assertNull(expenseDAO.getExpenseById(movie.getIdExpense()));
+        assertEquals(3, expenseDAO.getExpenseList().size());
     }
 
     @Test

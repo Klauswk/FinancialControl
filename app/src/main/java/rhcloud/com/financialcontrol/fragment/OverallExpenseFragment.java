@@ -25,7 +25,7 @@ import rhcloud.com.financialcontrol.service.ExpenseService;
  * @since 1.0
  */
 
-public class OverallExpenseFragment extends Fragment implements Consumer{
+public class OverallExpenseFragment extends Fragment{
 
     private FragmentOverallBinding binding;
     private ExpenseService expenseService;
@@ -45,14 +45,5 @@ public class OverallExpenseFragment extends Fragment implements Consumer{
         binding.setTotalExpenseTransport(expenseService.getTotalExpensesByType(ExpenseOption.TRANSPORT));
 
         return binding.getRoot();
-    }
-
-    @Override
-    public void onDataChange() {
-        binding.setTotalExpense(expenseService.getTotalExpenses());
-        binding.setTotalExpenseEtc(expenseService.getTotalExpensesByType(ExpenseOption.ETC));
-        binding.setTotalExpenseMovie(expenseService.getTotalExpensesByType(ExpenseOption.MOVIE));
-        binding.setTotalExpenseFood(expenseService.getTotalExpensesByType(ExpenseOption.FOOD));
-        binding.setTotalExpenseTransport(expenseService.getTotalExpensesByType(ExpenseOption.TRANSPORT));
     }
 }

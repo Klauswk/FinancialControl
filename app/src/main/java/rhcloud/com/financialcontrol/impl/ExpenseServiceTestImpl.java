@@ -44,4 +44,15 @@ public class ExpenseServiceTestImpl implements ExpenseService {
         }
         return  new BigDecimal(totalExpense).setScale(2, BigDecimal.ROUND_DOWN).doubleValue();
     }
+
+    @Override
+    public String[] getExpenseOptions() {
+        ExpenseOption[] options = ExpenseOption.values();
+        String[] expenseOptions = new String[options.length];
+        for (int i = 0; i < options.length; i++) {
+            expenseOptions[i] = options[i].name();
+        }
+
+        return expenseOptions;
+    }
 }

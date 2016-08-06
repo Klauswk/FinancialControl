@@ -69,6 +69,8 @@ public class AddExpenseFragment extends Fragment implements Producer, View.OnCli
                         break;
                     }
                 }
+                int i = binding.spOptions.getSelectedItemPosition();
+                exp.setExpenseOption(ExpenseOption.values()[i]);
                 expenseDAO.addExpense(exp);
                 consumer.onDataChange();
                 Toast.makeText(getContext(), "Expense Added!", Toast.LENGTH_SHORT).show();

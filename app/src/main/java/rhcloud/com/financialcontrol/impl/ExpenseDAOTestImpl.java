@@ -21,7 +21,7 @@ import rhcloud.com.financialcontrol.javabean.ExpenseOption;
 public class ExpenseDAOTestImpl implements ExpenseDAO {
 
     private List<Expense> expenseList;
-    private static int idExpense = 0;
+    private int idExpense = 0;
 
     public ExpenseDAOTestImpl(){
         if(expenseList == null){
@@ -30,6 +30,7 @@ public class ExpenseDAOTestImpl implements ExpenseDAO {
             expenseList.add(new Expense(idExpense++,"25.15","Lunch",ExpenseOption.FOOD));
             expenseList.add(new Expense(idExpense++,"180.80","Market",ExpenseOption.FOOD));
             expenseList.add(new Expense(idExpense++,"3.40","Bus",ExpenseOption.TRANSPORT));
+            idExpense = expenseList.size();
         }
     }
 
@@ -37,6 +38,7 @@ public class ExpenseDAOTestImpl implements ExpenseDAO {
         this();
         this.expenseList.clear();
         this.expenseList.addAll(expenseList);
+        idExpense = expenseList.size();
     }
 
 
@@ -80,8 +82,6 @@ public class ExpenseDAOTestImpl implements ExpenseDAO {
         checkForNullExpense(expense);
         Expense exp = new Expense();
         exp.setIdExpense(expense.getIdExpense());
-
-
         exp.setValue(expense.getValue());
         exp.setDescription(expense.getDescription());
         exp.setExpenseOption(expense.getExpenseOption());

@@ -3,6 +3,8 @@ package rhcloud.com.financialcontrol.javabean;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import static android.R.attr.id;
+
 /**
  * @author <a href="https://github.com/Klauswk">Klaus Klein</a>
  *
@@ -78,6 +80,6 @@ public class Expense{
 
     @Override
     public String toString() {
-        return value + "$ - " + description;
+        return idExpense + " " +value + "$ - " + description;
     }
 }

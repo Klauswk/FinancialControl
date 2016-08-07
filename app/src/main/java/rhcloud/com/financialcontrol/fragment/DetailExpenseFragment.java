@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -18,7 +17,7 @@ import rhcloud.com.financialcontrol.FinancialApplication;
 import rhcloud.com.financialcontrol.R;
 import rhcloud.com.financialcontrol.dao.ExpenseDAO;
 import rhcloud.com.financialcontrol.databinding.FragmentExpenseDetailsBinding;
-import rhcloud.com.financialcontrol.impl.ExpenseServiceTestImpl;
+import rhcloud.com.financialcontrol.impl.ExpenseServiceImpl;
 import rhcloud.com.financialcontrol.javabean.Expense;
 import rhcloud.com.financialcontrol.javabean.ExpenseOption;
 import rhcloud.com.financialcontrol.service.ExpenseService;
@@ -46,7 +45,7 @@ public class DetailExpenseFragment extends Fragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         expenseDAO = ((FinancialApplication)getActivity().getApplication()).getExpenseDAO();
-        expenseService = new ExpenseServiceTestImpl(expenseDAO);
+        expenseService = new ExpenseServiceImpl(expenseDAO);
         expense = expenseDAO.getExpenseById(getArguments().getInt("idExpense"));
         options = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1,expenseService.getExpenseOptions());
 

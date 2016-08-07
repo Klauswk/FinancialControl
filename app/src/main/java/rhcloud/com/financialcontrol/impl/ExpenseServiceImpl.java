@@ -1,7 +1,6 @@
 package rhcloud.com.financialcontrol.impl;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import rhcloud.com.financialcontrol.dao.ExpenseDAO;
 import rhcloud.com.financialcontrol.javabean.Expense;
@@ -10,15 +9,22 @@ import rhcloud.com.financialcontrol.service.ExpenseService;
 
 /**
  * @author <a href="https://github.com/Klauswk">Klaus Klein</a>
+ *
+ * The implemetation of the {@link ExpenseService}
+ *
  * @version 1.0
  * @since 1.0
  */
 
-public class ExpenseServiceTestImpl implements ExpenseService {
+public class ExpenseServiceImpl implements ExpenseService {
 
+    /**
+     * The data access object to iterate over.
+     * @since 1.0
+     */
     private ExpenseDAO expenseDAO;
 
-    public ExpenseServiceTestImpl( ExpenseDAO expenseDAO) {
+    public ExpenseServiceImpl(ExpenseDAO expenseDAO) {
         this.expenseDAO = expenseDAO;
     }
 

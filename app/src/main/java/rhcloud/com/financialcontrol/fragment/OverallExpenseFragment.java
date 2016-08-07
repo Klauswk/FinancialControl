@@ -6,16 +6,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
-import java.math.BigDecimal;
-
-import rhcloud.com.droidutils.tabutil.tabutil.interfaces.Consumer;
 import rhcloud.com.financialcontrol.FinancialApplication;
 import rhcloud.com.financialcontrol.R;
 import rhcloud.com.financialcontrol.databinding.FragmentOverallBinding;
-import rhcloud.com.financialcontrol.impl.ExpenseDAOTestImpl;
-import rhcloud.com.financialcontrol.impl.ExpenseServiceTestImpl;
+import rhcloud.com.financialcontrol.impl.ExpenseServiceImpl;
 import rhcloud.com.financialcontrol.javabean.ExpenseOption;
 import rhcloud.com.financialcontrol.service.ExpenseService;
 
@@ -36,7 +31,7 @@ public class OverallExpenseFragment extends Fragment{
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_overall, container, false);
 
-        expenseService = new ExpenseServiceTestImpl(((FinancialApplication)getActivity().getApplication()).getExpenseDAO());
+        expenseService = new ExpenseServiceImpl(((FinancialApplication)getActivity().getApplication()).getExpenseDAO());
 
         binding.setTotalExpense(expenseService.getTotalExpenses());
         binding.setTotalExpenseEtc(expenseService.getTotalExpensesByType(ExpenseOption.ETC));

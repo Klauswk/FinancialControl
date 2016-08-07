@@ -8,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import rhcloud.com.droidutils.tabutil.tabutil.interfaces.Consumer;
@@ -19,7 +17,6 @@ import rhcloud.com.financialcontrol.FinancialApplication;
 import rhcloud.com.financialcontrol.R;
 import rhcloud.com.financialcontrol.dao.ExpenseDAO;
 import rhcloud.com.financialcontrol.databinding.FragmentAddExpenseBinding;
-import rhcloud.com.financialcontrol.impl.ExpenseDAOTestImpl;
 import rhcloud.com.financialcontrol.javabean.Expense;
 import rhcloud.com.financialcontrol.javabean.ExpenseOption;
 

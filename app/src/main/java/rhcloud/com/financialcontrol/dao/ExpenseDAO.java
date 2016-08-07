@@ -7,6 +7,8 @@ import rhcloud.com.financialcontrol.javabean.Expense;
 /**
  * @author <a href="https://github.com/Klauswk">Klaus Klein</a>
  *
+ * Define the verbs needed to access and modify the {@link Expense} object.
+ *
  * @since 1.0
  * @version 1.0
  */

@@ -35,8 +35,9 @@ public class ExpenseDAOTest {
 
     @Test
     public void addExpense()  {
-        expenseDAO.addExpense(new Expense(0,"123","oi", ExpenseOption.ETC));
-        assertTrue(expenseDAO.getExpenseById(4).getValue().contentEquals("123"));
+        Expense expense = new Expense(0, "123", "oi", ExpenseOption.ETC);
+        expenseDAO.addExpense(expense);
+        assertTrue(expenseDAO.getExpenseById(expense.getIdExpense()).getValue().contentEquals("123"));
     }
 
     @Test(expected = NullPointerException.class)
@@ -46,8 +47,8 @@ public class ExpenseDAOTest {
 
     @Test
     public void removeById()  {
-        expenseDAO.removeById(4);
-        assertNull(expenseDAO.getExpenseById(4));
+        expenseDAO.removeById(movie.getIdExpense());
+        assertNull(expenseDAO.getExpenseById(movie.getIdExpense()));
     }
 
     @Test(expected = NullPointerException.class)
@@ -66,7 +67,7 @@ public class ExpenseDAOTest {
     public void updateExpense()  {
         Expense movie2 = new Expense(0, "20", "Movie", ExpenseOption.MOVIE);
         expenseDAO.updateExpense(movie2);
-        assertTrue(expenseDAO.getExpenseById(0).getValue().contentEquals("20"));
+        assertTrue(expenseDAO.getExpenseById(movie2.getIdExpense()).getValue().contentEquals("20"));
     }
 
     @Test(expected = NullPointerException.class)

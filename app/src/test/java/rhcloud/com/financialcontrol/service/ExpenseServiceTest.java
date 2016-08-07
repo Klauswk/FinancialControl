@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import rhcloud.com.financialcontrol.dao.ExpenseDAO;
 import rhcloud.com.financialcontrol.impl.ExpenseDAOTestImpl;
-import rhcloud.com.financialcontrol.impl.ExpenseServiceTestImpl;
+import rhcloud.com.financialcontrol.impl.ExpenseServiceImpl;
 import rhcloud.com.financialcontrol.javabean.Expense;
 import rhcloud.com.financialcontrol.javabean.ExpenseOption;
 
@@ -25,7 +25,7 @@ public class ExpenseServiceTest {
     @Before
     public void setUp(){
         expenseDAO = new ExpenseDAOTestImpl();
-        expenseService = new ExpenseServiceTestImpl(expenseDAO);
+        expenseService = new ExpenseServiceImpl(expenseDAO);
         test = new Expense(0,"123","Test value",ExpenseOption.ETC);
 
     }

@@ -2,9 +2,7 @@ package rhcloud.com.financialcontrol.impl;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +12,8 @@ import rhcloud.com.financialcontrol.javabean.ExpenseOption;
 
 /**
  * @author <a href="https://github.com/Klauswk">Klaus Klein</a>
+ *
+ * An base dummy implementation of {@link ExpenseDAO} for test purpose.
  *
  * @since 1.0
  * @version 1.0

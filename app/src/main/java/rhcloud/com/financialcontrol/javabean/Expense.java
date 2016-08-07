@@ -3,29 +3,35 @@ package rhcloud.com.financialcontrol.javabean;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import static android.R.attr.id;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * @author <a href="https://github.com/Klauswk">Klaus Klein</a>
  *
+ * A java bean that represents a expense.
+ *
+ * Extends {@link RealmObject} for use in {@link rhcloud.com.financialcontrol.impl.ExpenseDAORealm}
+ *
  * @since 1.0
  * @version 1.0
  */
-public class Expense{
+public class Expense extends RealmObject {
 
+    @PrimaryKey
     private int idExpense;
     private String value;
     private String description;
-    private ExpenseOption expenseOption;
+    private int expenseOption;
 
     public Expense(@NonNull int idExpense,@NonNull String value,@NonNull String description,@Nullable ExpenseOption expenseOption) {
         this.idExpense = idExpense;
         this.value = value;
         this.description = description;
         if(expenseOption == null){
-            this.expenseOption = ExpenseOption.ETC;
+            this.expenseOption = ExpenseOption.ETC.ordinal();
         }else{
-            this.expenseOption = expenseOption;
+            this.expenseOption = expenseOption.ordinal();
         }
     }
 
@@ -60,11 +66,11 @@ public class Expense{
     }
 
     public ExpenseOption getExpenseOption() {
-        return expenseOption;
+        return ExpenseOption.values()[expenseOption];
     }
 
     public void setExpenseOption(ExpenseOption expenseOption) {
-        this.expenseOption = expenseOption;
+        this.expenseOption = expenseOption.ordinal();
     }
 
     @Override
@@ -80,6 +86,6 @@ public class Expense{
 
     @Override
     public String toString() {
-        return idExpense + " " +value + "$ - " + description;
+        return value + "$ - " + description;
     }
 }

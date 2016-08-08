@@ -9,3 +9,4 @@
 .idea/
 app/build/
 gradle/
+DroidUtils/bintray_upload.gradle

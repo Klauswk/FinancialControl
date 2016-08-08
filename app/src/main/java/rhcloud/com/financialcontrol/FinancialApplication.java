@@ -7,6 +7,7 @@ import rhcloud.com.financialcontrol.di.component.DaggerExpenseComponent;
 import rhcloud.com.financialcontrol.di.component.ExpenseComponent;
 import rhcloud.com.financialcontrol.di.module.ExpenseModule;
 import rhcloud.com.financialcontrol.impl.ExpenseDAORealm;
+import rhcloud.com.financialcontrol.impl.ExpenseDAOTestImpl;
 
 /**
  * @author <a href="https://github.com/Klauswk">Klaus Klein</a>
@@ -35,8 +36,8 @@ public class FinancialApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        //this.expenseDAO = new ExpenseDAOTestImpl();
-        this.expenseDAO = new ExpenseDAORealm(getApplicationContext());
+        this.expenseDAO = new ExpenseDAOTestImpl();
+        //this.expenseDAO = new ExpenseDAORealm(getApplicationContext());
         component = DaggerExpenseComponent.builder().expenseModule(new ExpenseModule()).build();
     }
 

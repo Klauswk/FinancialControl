@@ -1,0 +1,8 @@
+<resources>
+    <declare-styleable name="form_item">
+        <attr name="tvTitle" format="string" />
+        <attr name="anwserHint" format="string" />
+        <attr name="anwserText" format="string" />
+        <attr name="android:enabled" />
+    </declare-styleable>
+</resources>

@@ -1,4 +1,4 @@
-include ':app', ':DruidUtils'
+include ':app'
 
 //include ':DroidUtils'
 //project(':DruidUtils').projectDir=new File('../DroidUtils/app')

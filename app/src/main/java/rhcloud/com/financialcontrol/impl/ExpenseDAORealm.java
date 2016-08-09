@@ -142,7 +142,11 @@ public class ExpenseDAORealm implements ExpenseDAO {
     }
 
     private int getNextKey() {
-        return realm.where(Expense.class).max("idExpense").intValue() + 1;
+        Number next = realm.where(Expense.class).max("idExpense");
+        if(next == null){
+            return 1;
+        }
+        return next.intValue() + 1;
     }
 
     /**

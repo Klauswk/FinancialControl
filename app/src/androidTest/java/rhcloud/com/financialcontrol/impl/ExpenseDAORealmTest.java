@@ -1,5 +1,6 @@
 package rhcloud.com.financialcontrol.impl;
 
+import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -27,7 +28,8 @@ public class ExpenseDAORealmTest{
     private Expense movie = new Expense(0, "10", "Movie", ExpenseOption.MOVIE);
 
     public ExpenseDAORealmTest(){
-        expenseDAO = new ExpenseDAORealm(InstrumentationRegistry.getTargetContext());
+        Context context = InstrumentationRegistry.getTargetContext();
+        expenseDAO = new ExpenseDAORealm(context);
     }
 
     @Test

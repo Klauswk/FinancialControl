@@ -9,7 +9,8 @@ android:
     - android-24
     - extra-android-m2repository
     - extra-android-support
-	
+    - sys-img-armeabi-v7a-android-22
+
 env:
   matrix:
      - ANDROID_TARGET=android-22  ANDROID_ABI=armeabi-v7a

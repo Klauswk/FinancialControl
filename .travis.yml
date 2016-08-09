@@ -11,6 +11,10 @@ android:
     - extra-android-support
     - sys-img-armeabi-v7a-android-22
 
+licenses:
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
+
 env:
   matrix:
      - ANDROID_TARGET=android-22  ANDROID_ABI=armeabi-v7a

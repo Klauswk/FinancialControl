@@ -12,8 +12,8 @@ android:
     - sys-img-armeabi-v7a-android-22
 
 licenses:
-    - 'android-sdk-license-.+'
-    - 'google-gdk-license-.+'
+    - 'android-sdk-preview-license-b0d7c9149880615a01390ea4ed4d92ab022382fc'
+    - 'android-sdk-license-8933bad161af4178b1185d1a37fbf41ea5269c55'
 
 env:
   matrix:

@@ -11,6 +11,10 @@ buildscript {
         //Realm Dependecies
         classpath "io.realm:realm-gradle-plugin:1.1.1"
     }
+
+    project.ext.preDexLibs = !project.hasProperty('disablePreDex')
+
+
 }
 
 allprojects {

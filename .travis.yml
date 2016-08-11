@@ -6,7 +6,7 @@ android:
     - android-23
     - extra-android-m2repository
     - extra-android-support
-    - sys-img-armeabi-v7a-android-22
+    - sys-img-armeabi-v7a-android-23
     - extra-google-google_play_services
   licenses: 
     - android-sdk-preview-license-52d11cd2
@@ -28,8 +28,7 @@ cache:
     - $HOME/.gradle/wrapper/
 env: 
   matrix: 
-    - "ANDROID_TARGET=android-22  ANDROID_ABI=armeabi-v7a"
-    - ADB_INSTALL_TIMEOUT=20
+    - "ANDROID_TARGET=android-23  ANDROID_ABI=armeabi-v7a"
 jdk: oraclejdk8
 language: android
 script: 

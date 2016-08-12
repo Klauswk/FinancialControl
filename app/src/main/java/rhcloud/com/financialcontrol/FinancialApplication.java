@@ -38,7 +38,7 @@ public class FinancialApplication extends Application {
         super.onCreate();
         this.expenseDAO = new ExpenseDAOTestImpl();
         //this.expenseDAO = new ExpenseDAORealm(getApplicationContext());
-        component = DaggerExpenseComponent.builder().expenseModule(new ExpenseModule()).build();
+        //component = DaggerExpenseComponent.builder().expenseModule(new ExpenseModule()).build();
     }
 
     public ExpenseDAO getExpenseDAO() {

@@ -57,6 +57,7 @@
             <Button
                 android:background="@drawable/modern_button_state"
                 android:text="Edit"
+                android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnEdit"
@@ -65,10 +66,21 @@
             <Button
                 android:background="@drawable/modern_button_state"
                 android:text="Save"
+                android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnSave"
                 android:visibility="@{state.get() ? View.VISIBLE : View.GONE}"/>
+
+
+            <Button
+                android:background="@drawable/modern_button_state"
+                android:text="Delete"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnDelete"
+                android:visibility="@{state.get() ? View.GONE : View.VISIBLE}"/>
 
         </LinearLayout>
     </ScrollView>

@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void createMainTab(){
-        tab = Tab.createTab(this,R.id.tabBody,R.id.tabLayout).addTab(new ExpenseListFragment(),"Expenses",getResources().getDrawable(android.R.drawable.ic_menu_add)).addTab(new AddExpenseFragment(),"Add Expense").addTab(new OverallExpenseFragment(),"Total Expenses");
+        Tab tab = new Tab(this,R.id.tabBody,R.id.tabLayout);
+        tab.addTab(ExpenseListFragment.getInstance(tab.getTabService()),"Expenses",getResources().getDrawable(android.R.drawable.ic_menu_add)).addTab(new AddExpenseFragment(),"Add Expense").addTab(new OverallExpenseFragment(),"Total Expenses");
     }
 
     public void addTab(TabFragment tabFragment){

@@ -12,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import rhcloud.com.droidutils.tabutil.tabutil.interfaces.Closeable;
+import rhcloud.com.droidutils.tabutil.tabutil.interfaces.FocusOnAdd;
+import rhcloud.com.droidutils.tabutil.tabutil.interfaces.TabService;
 import rhcloud.com.droidutils.validation.ObjectUtils;
 import rhcloud.com.financialcontrol.FinancialApplication;
 import rhcloud.com.financialcontrol.R;
@@ -22,6 +24,8 @@ import rhcloud.com.financialcontrol.javabean.Expense;
 import rhcloud.com.financialcontrol.javabean.ExpenseOption;
 import rhcloud.com.financialcontrol.service.ExpenseService;
 
+import static java.security.AccessController.getContext;
+import static rhcloud.com.financialcontrol.R.id.btnDelete;
 import static rhcloud.com.financialcontrol.R.id.btnEdit;
 import static rhcloud.com.financialcontrol.R.id.btnSave;
 
@@ -31,7 +35,7 @@ import static rhcloud.com.financialcontrol.R.id.btnSave;
  * @version 1.0
  * @since 1.0
  */
-public class DetailExpenseFragment extends Fragment implements View.OnClickListener, Closeable {
+public class DetailExpenseFragment extends Fragment implements View.OnClickListener, Closeable, FocusOnAdd {
 
     private FragmentExpenseDetailsBinding binding;
     private ExpenseDAO expenseDAO;
@@ -39,6 +43,14 @@ public class DetailExpenseFragment extends Fragment implements View.OnClickListe
     private ArrayAdapter<String> options;
     private ExpenseService expenseService;
     private Expense expense;
+    private TabService tabService;
+
+
+    public static DetailExpenseFragment getInstance(TabService tabService){
+        DetailExpenseFragment detailExpenseFragment = new DetailExpenseFragment();
+        detailExpenseFragment.setTabService(tabService);
+        return detailExpenseFragment;
+    }
 
     @Nullable
     @Override
@@ -52,6 +64,7 @@ public class DetailExpenseFragment extends Fragment implements View.OnClickListe
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_expense_details, container, false);
         binding.btnSave.setOnClickListener(this);
         binding.btnEdit.setOnClickListener(this);
+        binding.btnDelete.setOnClickListener(this);
         binding.spOptions.setAdapter(options);
         binding.spOptions.setSelection(expense.getExpenseOption().ordinal());
         binding.btnEdit.setVisibility(View.GONE);
@@ -73,6 +86,9 @@ public class DetailExpenseFragment extends Fragment implements View.OnClickListe
             case btnSave:
                 saveModifications();
                 break;
+            case btnDelete:
+                deleteExpense();
+                break;
         }
     }
 
@@ -80,6 +96,11 @@ public class DetailExpenseFragment extends Fragment implements View.OnClickListe
     public void onStart() {
         super.onStart();
         binding.spOptions.setSelection(expense.getExpenseOption().ordinal());
+    }
+
+    private void deleteExpense(){
+        expenseDAO.removeExpense(binding.getExpense());
+        tabService.getOnTabRemove().removeTab(this);
     }
 
     private void enableEdit() {
@@ -97,6 +118,14 @@ public class DetailExpenseFragment extends Fragment implements View.OnClickListe
             Toast.makeText(getContext(), "Saved: " + exp.getDescription(), Toast.LENGTH_SHORT).show();
             stateOfButton.set(false);
         }
+    }
+
+    public TabService getTabService() {
+        return tabService;
+    }
+
+    public void setTabService(TabService tabService) {
+        this.tabService = tabService;
     }
 
     @Override
